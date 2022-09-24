@@ -6,7 +6,7 @@
         $this->open('combadd.sqlite');
     }
     }
-    $dbh = new MyDB();
+    $dbh = new SQLite3('myDatabase.sqlite');
     if(!$dbh){
     echo $dbh->lastErrorMsg();
     } else {
