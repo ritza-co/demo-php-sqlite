@@ -3,18 +3,18 @@
     {
     function __construct()
     {
-        $this->open('combadd.sqlite');
+        $this->open($_SERVER["PERSISTENT_STORAGE_DIR"] . '/combadd.sqlite');
     }
     }
-    //$dbh = new SQLite3('myDatabase.sqlite');
+    $dbh = new MyDB();
     // Create connection
-    $dbh = new mysqli($_SERVER["DATABASE_URL"], '', '');
+    // $dbh = new mysqli($_SERVER["DATABASE_URL"], '', '');
 
-    // Check connection
-    if ($dbh->connect_error) {
-    die("Connection failed: " . $dbh->connect_error);
-    }
-    echo "Connected successfully";
+    // // Check connection
+    // if ($dbh->connect_error) {
+    // die("Connection failed: " . $dbh->connect_error);
+    // }
+    // echo "Connected successfully";
     if(!$dbh){
     echo $dbh->lastErrorMsg();
     } else {
