@@ -3,7 +3,7 @@
     {
     function __construct()
     {
-        $this->open($_SERVER["PERSISTENT_STORAGE_DIR"] . '/combadd.sqlite');
+        $this->open($_ENV["PERSISTENT_STORAGE_DIR"] . '/combadd.sqlite');
     }
     }
     $dbh = new MyDB();
