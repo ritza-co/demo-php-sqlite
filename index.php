@@ -1,4 +1,4 @@
-<?php  include('app.php'); ?>
+<?php  include('dbconfig.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
