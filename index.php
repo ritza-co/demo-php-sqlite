@@ -1,14 +1,4 @@
-<?php  include('app.php');
-	if (isset($_POST['save'])) {
-		$name = $_POST['name'];
-		$author = $_POST['author'];
-
-        // Makes query with post data
-        $query = "INSERT INTO books (name, author) VALUES ('$name', '$author')";
-        $dbh->exec($query);
-        $_SESSION['message'] = "Book saved";
-	}
-?>
+<?php  include('app.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +43,7 @@ $results = $dbh->query($query); ?>
 	<?php } ?>
 </table>
 
-	<form method="post" action="index.php" >
+	<form method="post" action="app.php" >
 		<div class="input-group">
 			<label>Name</label>
 			<input type="text" name="name" value="">
