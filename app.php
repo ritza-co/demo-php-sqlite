@@ -41,8 +41,8 @@
 
         // Makes query with post data
         $query = "INSERT INTO books (name, author) VALUES ('$name', '$author')";
+        header('location: index.php');
         $dbh->exec($query);
         $_SESSION['message'] = "Book saved";
-        header('location: index.php');
 	}
 ?>
