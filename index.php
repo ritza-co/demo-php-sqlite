@@ -8,7 +8,7 @@
 <body>
 
 <?php // Makes query with rowid
-$query = "SELECT * FROM books";
+$query = "SELECT rowid, name, author FROM books";
 
 $results = $dbh->query($query); ?>
 
@@ -26,10 +26,10 @@ $results = $dbh->query($query); ?>
 			<td><?php echo $row['name']; ?></td>
 			<td><?php echo $row['author']; ?></td>
 			<td>
-				<a href="app.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
+				<a href="app.php?edit=<?php echo $row['rowid']; ?>" class="edit_btn" >Edit</a>
 			</td>
 			<td>
-				<a href="app.php?del=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
+				<a href="app.php?del=<?php echo $row['rowid']; ?>" class="del_btn">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>
