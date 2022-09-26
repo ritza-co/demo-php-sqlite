@@ -1,4 +1,3 @@
-<?php  include('dbconfig.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,46 +6,16 @@
 </head>
 <body>
 
-<?php // Makes query with rowid
-$query = "SELECT * FROM books";
+<?php
+$myfile = fopen("/workspace/mnt/data--capsule-bdmfjp-x/newfile.txt", "w") or die("Unable to open file!");
+$txt = "John Doe\n";
+fwrite($myfile, $txt);
+$txt = "Jane Doe\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+?>
 
-$results = $dbh->query($query); ?>
+<h1>Done</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Author</th>
-			<th colspan="2">Action</th>
-		</tr>
-	</thead>
-	
-	<?php while ($row = $results->fetchArray()) { ?>
-		<tr>
-			<td><?php echo $row['name']; ?></td>
-			<td><?php echo $row['author']; ?></td>
-			<td>
-				<a href="app.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
-			</td>
-			<td>
-				<a href="app.php?del=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
-			</td>
-		</tr>
-	<?php } ?>
-</table>
-
-	<form method="post" action="app.php" >
-		<div class="input-group">
-			<label>Name</label>
-			<input type="text" name="name" value="">
-		</div>
-		<div class="input-group">
-			<label>Author</label>
-			<input type="text" name="author" value="">
-		</div>
-		<div class="input-group">
-			<button class="btn" type="submit" name="save" >Save</button>
-		</div>
-	</form>
 </body>
 </html>
