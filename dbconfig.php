@@ -3,7 +3,8 @@
     {
     function __construct()
     {
-        $this->open($_ENV["PERSISTENT_STORAGE_DIR"] . 'test.sqlite');
+        echo $_ENV["PERSISTENT_STORAGE_DIR"] . '/test.sqlite';
+        $this->open($_ENV["PERSISTENT_STORAGE_DIR"] . '/test.sqlite');
         //$this->open('first.db');
     }
     }
