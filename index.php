@@ -7,12 +7,13 @@
 <body>
 
 <?php
-$myfile = fopen("/workspace/mnt/data--capsule-bdmfjp-x/newfile.txt", "w") or die("Unable to open file!");
-$txt = "John Doe\n";
-fwrite($myfile, $txt);
-$txt = "Jane Doe\n";
-fwrite($myfile, $txt);
-fclose($myfile);
+    $dbh = new SQLite3('/workspace/mnt/data--capsule-bdmfjp-x/db.sqlite');
+    if(!$dbh){
+        echo $dbh->lastErrorMsg();
+    } else {
+        $query = "CREATE TABLE IF NOT EXISTS books (id INT PRIMARY KEY, name STRING, author STRING)";
+        $dbh->exec($query);
+    }
 ?>
 
 <h1>Done</h1>
