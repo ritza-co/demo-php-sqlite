@@ -1,7 +1,4 @@
 <?php include('dbconfig.php');
-    // initialize variables
-	$name = "";
-	$author = "";
 
     if (isset($_GET['del'])) {
         $id = $_GET['del'];
@@ -9,6 +6,17 @@
         $_SESSION['message'] = "Book deleted!"; 
         header('location: index.php');
     }
+
+	if (isset($_POST['update'])) {
+		$id = $_POST['id'];
+		$name = $_POST['name'];
+		$author = $_POST['author'];
+	
+		$query = "UPDATE books SET name='$name', author='$author' WHERE rowid=$id";
+		$dbh->exec($query);
+		$_SESSION['message'] = "Address updated!"; 
+		header('location: index.php');
+	}
 
 	if (isset($_POST['save'])) {
 		$name = $_POST['name'];
