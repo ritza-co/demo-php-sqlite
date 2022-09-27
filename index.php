@@ -11,11 +11,9 @@
 		$query = "SELECT rowid, name, author FROM books WHERE rowid=$id";
 		$result = $dbh->query($query);
 
-		if (count($result) == 1 ) {
-			$entry = $result->fetchArray();
-			$name = $entry['name'];
-			$author = $entry['author'];
-		}
+		$entry = $result->fetchArray();
+		$name = $entry['name'];
+		$author = $entry['author'];
 	}
 ?>
 <!DOCTYPE html>
