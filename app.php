@@ -26,4 +26,3 @@
         $dbh->exec($query);
         header('location: index.php');
 	}
-?>
