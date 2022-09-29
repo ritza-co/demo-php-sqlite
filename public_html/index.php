@@ -22,11 +22,13 @@
 	$author = "";
 	$update = false;
 
+	// Check for edit action
 	if (isset($_GET['edit'])) {
+
 		$id = $_GET['edit'];
 		$update = true;
-		$query = "SELECT rowid, book_title, author FROM books WHERE rowid=$id";
-		$result = $dbh->query($query);
+		$query = "SELECT * FROM books WHERE id=$id";
+		$result = $db->query($query);
 
 		$entry = $result->fetchArray();
 		$name = $entry['book_title'];
@@ -34,12 +36,11 @@
 	}
 	?>
 
-	<?php // Makes query with rowid
-	$query = "SELECT book_title, author FROM books";
+	<?php
+	// Get all books
+	$query = "SELECT * FROM books";
 
 	$results = $db->query($query);
-
-
 	?>
 	<header>
 		<h1>Book Recommendations CRUD demo</h1>
@@ -49,7 +50,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Name</th>
+					<th>Book Title</th>
 					<th>Author</th>
 					<th colspan="2">Action</th>
 				</tr>
@@ -60,10 +61,10 @@
 					<td><?php echo $row['book_title']; ?></td>
 					<td><?php echo $row['author']; ?></td>
 					<td>
-						<a href="index.php?edit=<?php echo $row['rowid']; ?>">Edit</a>
+						<a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
 					</td>
 					<td>
-						<a href="app.php?del=<?php echo $row['rowid']; ?>">Delete</a>
+						<a href="app.php?del=<?php echo $row['id']; ?>">Delete</a>
 					</td>
 				</tr>
 			<?php } ?>
@@ -76,12 +77,12 @@
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
 
 			<p>
-				<label for="book_title">Book Title</label>
+				<label for="book_title">Book Title</label> <br>
 				<input type="text" name="book_title" value="<?php echo $name; ?>">
 			</p>
 
 			<p>
-				<label for="author">Author</label>
+				<label for="author">Author</label> <br>
 				<input type="text" name="author" value="<?php echo $author; ?>">
 			</p>
 

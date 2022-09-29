@@ -7,6 +7,6 @@ $database_name = "/home/henry/code/demo-php-sqlite/public_html/database/my_db.db
 $db = new SQLite3($database_name);
 
 // Create Table "books" in Database (if doesn't exist)
-$query = "CREATE TABLE IF NOT EXISTS books (name STRING, author STRING)";
+$query = "CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, book_title STRING, author STRING)";
 
 $db->exec($query);
