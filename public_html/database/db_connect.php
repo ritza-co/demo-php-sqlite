@@ -1,7 +1,8 @@
 <?php 
 
 // Database name
-$database_name = "/home/henry/code/demo-php-sqlite/public_html/database/my_db.db";
+$database_name = getcwd()."/database/my_db.db";
+
 
 // Database Connection
 $db = new SQLite3($database_name);
