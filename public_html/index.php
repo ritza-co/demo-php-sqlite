@@ -33,6 +33,11 @@ include "database/db_connect.php"; ?>
 			// Get book by ID
 			$id = $_POST['book_id'];
 			$update = true;
+
+			// Sanitize query
+			
+
+
 			$query = "SELECT * FROM books WHERE id=$id";
 			$result = $db->query($query);
 			$book = $result->fetchArray();
