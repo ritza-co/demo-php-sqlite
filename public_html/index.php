@@ -34,12 +34,11 @@ include "database/db_connect.php"; ?>
 			$id = $_POST['book_id'];
 			$update = true;
 
-			// Sanitize query
-			
+			// Get Book to edit (parameterized)
+			$stmt = $db->prepare('SELECT * FROM books WHERE id=:id');
+			$stmt->bindValue(':id',$id,SQLITE3_INTEGER);
 
-
-			$query = "SELECT * FROM books WHERE id=$id";
-			$result = $db->query($query);
+			$result = $stmt->execute();
 			$book = $result->fetchArray();
 		}
 	}

@@ -11,9 +11,10 @@ if ($_POST) {
 		// Get variables from POST request
 		$id = $_POST['book_id'];
 
-		// Delete book by ID
-		$query = "DELETE FROM books WHERE id=$id";
-		$db->exec($query);
+		// Delete Book by ID (parameterized)
+		$stmt = $db->prepare('DELETE FROM books WHERE id=:id');
+		$stmt->bindValue(':id',$id,SQLITE3_INTEGER);
+		$stmt->execute();
 
 		// Redirect to home page
 		header('location: index.php');
@@ -27,9 +28,13 @@ if ($_POST) {
 		$book_title = $_POST['book_title'];
 		$author = $_POST['author'];
 
-		// Update record (book)
-		$query = "UPDATE books SET book_title='$book_title', author='$author' WHERE id=$id";
-		$db->exec($query);
+		// Update book record (parametized)
+		$stmt = $db->prepare("UPDATE books SET book_title=:book_title, author=:author WHERE id=:id");
+		$stmt->bindValue(':book_title',$book_title,SQLITE3_TEXT);
+		$stmt->bindValue(':author',$author,SQLITE3_TEXT);
+		$stmt->bindValue(':id',$id,SQLITE3_INTEGER);
+		
+		$stmt->execute();
 
 		// Redirect to home page
 		header('location: index.php');
@@ -42,9 +47,11 @@ if ($_POST) {
 		$book_title = $_POST['book_title'];
 		$author = $_POST['author'];
 
-		// Insert a new record (book) into database
-		$query = "INSERT INTO books (book_title, author) VALUES ('$book_title', '$author')";
-		$db->exec($query);
+		// Insert a new book record into database (parametized)
+		$stmt = $db->prepare("INSERT INTO books (book_title, author) VALUES (:book_title, :author)");
+		$stmt->bindValue(':book_title',$book_title,SQLITE3_TEXT);
+		$stmt->bindValue(':author',$author,SQLITE3_TEXT);
+		$stmt->execute();
 
 		// Redirect to home page
 		header('location: index.php');
