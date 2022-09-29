@@ -1,4 +1,4 @@
-<?php include('dbconfig.php');
+<?php include "database/db_connect.php"; 
 
     if (isset($_GET['del'])) {
         $id = $_GET['del'];
@@ -23,6 +23,6 @@
 
         // Makes query with post data
         $query = "INSERT INTO books (name, author) VALUES ('$name', '$author')";
-        $dbh->exec($query);
+        $db->exec($query);
         header('location: index.php');
 	}
