@@ -1,34 +1,43 @@
-<?php include "database/db_connect.php"; 
+<?php include "database/db_connect.php";
 
-    if (isset($_GET['del'])) {
+// Check for POST and redirect to home if empty
+if ($_POST) {
 
-        $id = $_GET['del'];
-        $query = "DELETE FROM books WHERE rowid=$id";
+	// Check for delete
+	if ($_POST["rest_action"] == "delete") {
+		$id = $_POST['book_id'];
+		$query = "DELETE FROM books WHERE id=$id";
 		$db->exec($query);
-        header('location: index.php');
+		header('location: index.php');
+	}
 
-    }
+	// Check for update
+	if ($_POST["rest_action"] == "update") {
 
-	if (isset($_POST['update'])) {
-
-		$id = $_POST['id'];
+		$id = $_POST['book_id'];
 		$book_title = $_POST['book_title'];
 		$author = $_POST['author'];
 	
-		$query = "UPDATE books SET book_title='$book_title', author='$author' WHERE rowid=$id";
+		$query = "UPDATE books SET book_title='$book_title', author='$author' WHERE id=$id";
 		$db->exec($query);
 		header('location: index.php');
-
 	}
 
-	if (isset($_POST['save'])) {
+	// Check for store
+	if ($_POST["rest_action"] == "store") {
 
 		$book_title = $_POST['book_title'];
 		$author = $_POST['author'];
-
-        // Makes query with post data
-        $query = "INSERT INTO books (book_title, author) VALUES ('$book_title', '$author')";
-        $db->exec($query);
-        header('location: index.php');
-		
+	
+		// Makes query with post data
+		$query = "INSERT INTO books (book_title, author) VALUES ('$book_title', '$author')";
+		$db->exec($query);
+	
+	
+		header('location: index.php');
 	}
+
+
+} else {
+	header('location: index.php');
+}

@@ -7,9 +7,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Book Recommendations</title>
-
+	<!-- 
 	<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"> -->
 
 
 </head>
@@ -22,17 +22,19 @@
 	$author = "";
 	$update = false;
 
-	// Check for edit action
-	if (isset($_GET['edit'])) {
+	// Check for rest action
+	if ($_POST) {
 
-		$id = $_GET['edit'];
-		$update = true;
-		$query = "SELECT * FROM books WHERE id=$id";
-		$result = $db->query($query);
+		// Check if Edit has been called
+		if ($_POST["rest_action"] == "edit") {
 
-		$entry = $result->fetchArray();
-		$name = $entry['book_title'];
-		$author = $entry['author'];
+			// Get book by ID
+			$id = $_POST['book_id'];
+			$update = true;
+			$query = "SELECT * FROM books WHERE id=$id";
+			$result = $db->query($query);
+			$book = $result->fetchArray();
+		}
 	}
 	?>
 
@@ -61,10 +63,22 @@
 					<td><?php echo $row['book_title']; ?></td>
 					<td><?php echo $row['author']; ?></td>
 					<td>
-						<a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
+
+						<form method="POST">
+							<input type="hidden" name="book_id" value="<?php echo $row['id'] ?>">
+							<input type="hidden" name="rest_action" value="edit">
+							<button>Edit</button>
+						</form>
+
 					</td>
 					<td>
-						<a href="app.php?del=<?php echo $row['id']; ?>">Delete</a>
+
+						<form action="app.php" method="POST">
+							<input type="hidden" name="book_id" value="<?php echo $row['id'] ?>">
+							<input type="hidden" name="rest_action" value="delete">
+							<button>Delete</button>
+						</form>
+
 					</td>
 				</tr>
 			<?php } ?>
@@ -74,22 +88,23 @@
 	<section>
 		<form method="post" action="app.php">
 
-			<input type="hidden" name="id" value="<?php echo $id; ?>">
-
 			<p>
 				<label for="book_title">Book Title</label> <br>
-				<input type="text" name="book_title" value="<?php echo $name; ?>">
+				<input type="text" name="book_title" value="<?php echo $book["book_title"] ?? '' ?>">
 			</p>
 
 			<p>
 				<label for="author">Author</label> <br>
-				<input type="text" name="author" value="<?php echo $author; ?>">
+				<input type="text" name="author" value="<?php echo $book["author"] ?? '' ?>">
 			</p>
 
 			<p>
 				<?php if ($update == true) : ?>
+					<input type="hidden" name="book_id" value="<?php echo $id; ?>">
+					<input type="hidden" name="rest_action" value="update">
 					<button type="submit" name="update">Update</button>
 				<?php else : ?>
+					<input type="hidden" name="rest_action" value="store">
 					<button type="submit" name="save">Save</button>
 				<?php endif ?>
 			</p>
