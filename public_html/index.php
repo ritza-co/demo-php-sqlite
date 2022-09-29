@@ -1,4 +1,6 @@
-<?php include "database/db_connect.php"; ?>
+<?php
+// Establish database connection
+include "database/db_connect.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,15 +41,17 @@
 	?>
 
 	<?php
-	// Get all books
+	// Get all books from database
 	$query = "SELECT * FROM books";
-
 	$results = $db->query($query);
 	?>
+
+	<!-- Page header -->
 	<header>
 		<h1>Book Recommendations CRUD demo</h1>
 	</header>
 
+	<!-- Section: List book recommendations -->
 	<section>
 		<table>
 			<thead>
@@ -85,6 +89,7 @@
 		</table>
 	</section>
 
+	<!-- Section: Form -->
 	<section>
 		<form method="post" action="app.php">
 
@@ -111,9 +116,6 @@
 
 		</form>
 	</section>
-
-
-
 
 </body>
 
