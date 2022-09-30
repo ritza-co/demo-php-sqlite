@@ -66,7 +66,7 @@ include "database/db_connect.php"; ?>
 				</tr>
 			</thead>
 
-			<?php while ($row = $results->fetchArray()) { ?>
+			<?php while ($row = $results->fetchArray()) : ?>
 				<tr>
 					<td><?php echo $row['book_title']; ?></td>
 					<td><?php echo $row['author']; ?></td>
@@ -89,7 +89,7 @@ include "database/db_connect.php"; ?>
 
 					</td>
 				</tr>
-			<?php } ?>
+			<?php endwhile ?>
 		</table>
 	</section>
 
